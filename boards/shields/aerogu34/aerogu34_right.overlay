@@ -1,0 +1,53 @@
+#include "aerogu34.dtsi"
+#include <behaviors.dtsi>
+#include <input/processors.dtsi>
+#include <input/processors/runtime-input-processor.dtsi>
+#include <dt-bindings/zmk/runtime_input_processor.h>
+
+&default_transform {
+    col-offset = <5>;
+};
+
+&xiao_serial { status = "disabled"; };
+
+/* Disable I2C0 to prevent conflict with SPI0 (same hardware peripheral). */
+&i2c0 { status = "disabled"; };
+
+&scroll_runtime_input_processor {
+    processor-label = "rscroll";
+    x-codes = <INPUT_REL_X>;
+    y-codes = <INPUT_REL_Y>;
+    xy-to-scroll-enabled;
+    active-layers = <8>;  /* BIT(3) = layer 3 (Scroll) */
+    axis-snap-mode = <AXIS_SNAP_MODE_Y>;
+    axis-snap-threshold = <200>;
+};
+
+/ {
+    deadzone_processor: deadzone_processor {
+        compatible = "zmk,input-processor-deadzone";
+        #input-processor-cells = <0>;
+        threshold = <10>;
+        timeout-ms = <300>;
+    };
+
+    trackball_listener: trackball_listener {
+        compatible = "zmk,input-listener";
+        device = <&trackball>;
+        input-processors = <&deadzone_processor
+                            &mouse_runtime_input_processor
+                            &scroll_runtime_input_processor>;
+    };
+};
+
+&spi0 {
+    status = "okay";
+
+    trackball: trackball@0 {
+        status = "okay";
+        compatible = "pixart,paw3222";
+        reg = <0>;
+        spi-max-frequency = <2000000>;
+        irq-gpios = <&xiao_d 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+    };
+};

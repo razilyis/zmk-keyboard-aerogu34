@@ -1,0 +1,46 @@
+manifest:
+  defaults:
+    revision: main
+  remotes:
+    - name: cormoran
+      url-base: https://github.com/cormoran
+    - name: sekigon-gonnoc
+      url-base: https://github.com/sekigon-gonnoc
+    - name: caksoylar
+      url-base: https://github.com/caksoylar
+    - name: prospector
+      url-base: https://github.com/t-ogura
+  projects:
+    # ZMK: cormoran fork with DYA Studio RPC subsystem
+    - name: zmk
+      remote: cormoran
+      revision: v0.3-branch+dya
+      import: app/west.yml
+    # Trackball driver
+    - name: zmk-driver-paw3222
+      remote: sekigon-gonnoc
+    # RGB LED widget
+    # Pin to commit before "Remove v0.3 compatibility shims" (5b5a198);
+    # later commits drop seeeduino_xiao_ble.overlay (and v0.3 compat shims).
+    - name: zmk-rgbled-widget
+      remote: caksoylar
+      revision: a3510c9de46de8b42c803286f4978466c6ea3916
+    # DYA Studio modules
+    - name: zmk-module-ble-management
+      remote: cormoran
+    - name: zmk-module-battery-history
+      remote: cormoran
+    - name: zmk-module-settings-rpc
+      remote: cormoran
+    - name: zmk-module-runtime-input-processor
+      remote: cormoran
+    # Deadzone input processor
+    - name: zmk-input-processor-deadzone
+      remote: prospector
+    # Prospector
+    - name: prospector-zmk-module
+      remote: prospector
+      revision: main
+      path: modules/prospector-zmk-module
+  self:
+    path: config
