@@ -68,5 +68,9 @@
         reg = <0>;
         spi-max-frequency = <2000000>;
         irq-gpios = <&xiao_d 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        /* Boot-time sensor CPI (counts per inch). Valid range 608-4826 in
+         * steps of 38; driver rounds down. 800 maps to 21*38 = 798.
+         * DYA Studio's runtime-input-processor can override at runtime. */
+        res-cpi = <800>;
     };
 };
