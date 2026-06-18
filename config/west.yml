@@ -31,16 +31,16 @@ manifest:
     # ZMK main, but we're on ZMK v0.3-branch+dya / Zephyr 3.5).
     - name: zmk-module-ble-management
       remote: cormoran
-      revision: 851661c
+      revision: 851661cd21f2aded8ec649da86e01a207dc4b973
     - name: zmk-module-battery-history
       remote: cormoran
-      revision: 307755d
+      revision: 307755dd2ad4d320e14de162e8e5ef018f29d929
     - name: zmk-module-settings-rpc
       remote: cormoran
-      revision: ad1c995
+      revision: ad1c995cf910ca989ecd6352a1d0b41ccb18362c
     - name: zmk-module-runtime-input-processor
       remote: cormoran
-      revision: dbf92f7
+      revision: dbf92f764de8b6ffd60bf5850514302875fe2570
     # Deadzone input processor
     - name: zmk-input-processor-deadzone
       remote: prospector
