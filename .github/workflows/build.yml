@@ -66,9 +66,20 @@ jobs:
           if [ -n "$SNIPPET" ]; then
             EXTRA_ARGS="$EXTRA_ARGS -DSNIPPET=${SNIPPET}"
           fi
+          # BOARD_ROOT (not ZMK_EXTRA_MODULES) is used here because
+          # $GITHUB_WORKSPACE doubles as the west workspace root after
+          # `west update`, which clones Zephyr into $GITHUB_WORKSPACE/zephyr.
+          # Registering $GITHUB_WORKSPACE as an extra ZMK module then makes
+          # zephyr_module.py fall back to its default cmake/kconfig paths
+          # ('zephyr/CMakeLists.txt' and 'zephyr/Kconfig') -- which now point
+          # at the cloned Zephyr's own files, causing recursive Kconfig
+          # source-of-self errors and "zephyr_linker already configured".
+          # BOARD_ROOT only adds the boards/ search path; it leaves the
+          # workspace out of Zephyr's module list and avoids the conflict.
           west build -s zmk/app -p -b ${{ matrix.board }} \
             -- -DSHIELD="${SHIELD}" \
-            -DZMK_EXTRA_MODULES="${GITHUB_WORKSPACE}" \
+            -DBOARD_ROOT="${GITHUB_WORKSPACE}" \
+            -DZMK_CONFIG="${GITHUB_WORKSPACE}/config" \
             ${EXTRA_ARGS} ${CMAKE_ARGS}
 
       - name: Rename artifact
