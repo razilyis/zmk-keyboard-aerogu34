@@ -11,39 +11,26 @@ manifest:
     - name: prospector
       url-base: https://github.com/t-ogura
   projects:
-    # ZMK: cormoran fork with DYA Studio RPC subsystem
+    # ZMK: cormoran fork, main+dya = ZMK main (Zephyr 4.1) base with DYA Studio RPC
     - name: zmk
       remote: cormoran
-      revision: v0.3-branch+dya
+      revision: main+dya
       import: app/west.yml
     # Trackball driver
     - name: zmk-driver-paw3222
       remote: sekigon-gonnoc
-    # RGB LED widget
-    # Pin to commit before "Remove v0.3 compatibility shims" (5b5a198);
-    # later commits drop seeeduino_xiao_ble.overlay (and v0.3 compat shims).
+    # RGB LED widget (main supports Zephyr 4.1 / xiao_ble naming)
     - name: zmk-rgbled-widget
       remote: caksoylar
-      revision: a3510c9de46de8b42c803286f4978466c6ea3916
-    # DYA Studio modules
-    # cormoran's modules are migrating their main branches to ZMK main /
-    # Zephyr 4.x, but we're on ZMK v0.3-branch+dya / Zephyr 3.5. Two of the
-    # four have a 'zmk-v0.3.0.0' tag pointing at the last v0.3-compatible
-    # commit; use it. The other two still have v0.3-compatible mains but no
-    # tag, so pin defensively to the current tip SHA (so a future v4 PR
-    # doesn't silently break this build).
+    # DYA Studio modules (main = v4-compatible)
     - name: zmk-module-ble-management
       remote: cormoran
-      revision: zmk-v0.3.0.0
     - name: zmk-module-battery-history
       remote: cormoran
-      revision: 307755dd2ad4d320e14de162e8e5ef018f29d929
     - name: zmk-module-settings-rpc
       remote: cormoran
-      revision: ad1c995cf910ca989ecd6352a1d0b41ccb18362c
     - name: zmk-module-runtime-input-processor
       remote: cormoran
-      revision: zmk-v0.3.0.0
     # Deadzone input processor
     - name: zmk-input-processor-deadzone
       remote: prospector

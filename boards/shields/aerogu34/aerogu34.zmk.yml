@@ -3,7 +3,7 @@ id: aerogu34
 name: aerogu34
 type: shield
 url: https://github.com/t-ogura/zmk-keyboard-aerogu34
-requires: [seeeduino_xiao_ble]
+requires: [seeed_xiao]
 features:
   - keys
   - pointer
