@@ -104,8 +104,8 @@
             display-name = "Function";
             bindings = <
 &kp F1         &kp F2           &kp F3      &kp F4         &kp F5                               &kp F6             &kp F7    &kp F8    &kp F9     &kp F10
-&kp JP_COLON   &kp EXCLAMATION  &kp SLASH   &kp JP_LPAREN  &kp JP_LBRACKET                      &kp JP_UNDERSCORE  &mkp MB1  &kp UP    &mkp MB2   &kp SEMICOLON
-&kp SEMICOLON  &kp QUESTION     &kp JP_YEN  &kp JP_RPAREN  &kp JP_RBRACKET                      &kp JP_AT          &kp LEFT  &kp DOWN  &kp RIGHT  &kp F11
+&kp JP_COLON   &kp EXCLAMATION  &kp SLASH   &kp JP_LPAREN  &kp JP_LBRACKET                      &kp JP_UNDERSCORE  &mkp MB1  &kp UP    &mkp MB2   &kp F11
+&kp SEMICOLON  &kp QUESTION     &kp JP_YEN  &kp JP_RPAREN  &kp JP_RBRACKET                      &kp JP_AT          &kp LEFT  &kp DOWN  &kp RIGHT  &kp F12
                                                             &trans           &trans    &trans     &trans
             >;
         };
@@ -113,10 +113,10 @@
         number_layer {
             display-name = "Number";
             bindings = <
-&kp TAB               &kp N7        &kp N8        &kp N9        &kp MINUS                          &kp RIGHT_BRACKET  &trans    &mkp MB3  &trans     &trans
-&kp JP_ASTERISK       &kp NUMBER_4  &kp N5        &kp NUMBER_6  &kp JP_PLUS                        &kp RPAR           &mkp MB1  &kp UP    &mkp MB2   &kp COLON
-&mt LEFT_SHIFT SLASH  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp EQUAL                          &kp RIGHT_BRACE    &kp LEFT  &kp DOWN  &kp RIGHT  &kp SLASH
-                                                                 &kp DEL    &kp LANG2    &kp LANG1  &trans
+&kp TAB               &kp N7        &kp N8        &kp N9        &kp MINUS                          &kp RIGHT_BRACKET  &trans    &mkp MB3  &trans     &kp ESC
+&kp DOT       &kp NUMBER_4  &kp N5        &kp NUMBER_6  &kp JP_PLUS                        &kp RPAR           &mkp MB1  &kp UP    &mkp MB2   &kp COLON
+&kp NUMBER_0  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp EQUAL                          &kp RIGHT_BRACE    &kp LEFT  &kp DOWN  &kp RIGHT  &kp SLASH
+                                                                 &kp ESC    &kp DEL    &kp LANG1  &trans
             >;
         };
 
