@@ -1,60 +1,9 @@
-# aerogu34
-
-aerogu34 は Seeeduino XIAO BLE (nRF52840) ベースの 34 キー左右分割ワイヤレスキーボードです。
-右側 (セントラル) に PAW3222 トラックボールを搭載し、JIS 配列を OS 設定で前提とした日本語キーマップを使用します。
-
-## 主な特徴
-
-- **34 キー**: 各サイドに 5×3 + 親指 2 キー
-- **左右分割 + ワイヤレス**: BLE で接続。USB は右 (セントラル) のみ
-- **トラックボール**: 右側に PAW3222
-- **RGB LED ステータスウィジェット**: バッテリーレベル/接続状態を表示
-- **DYA Studio 対応**: BLE 接続管理、バッテリー履歴、設定 RPC、トラックボール設定をブラウザから変更可能
-  ([DYA Studio](https://studio.dya.cormoran.works/))
-- **Prospector status advertisement 対応**:
-  [Prospector Scanner](https://github.com/carrefinho/prospector-zmk-module) で
-  キーボードの状態を別デバイスから観察可能
-
-## ハードウェア
-
-- マイコン: [Seeeduino XIAO BLE](https://wiki.seeedstudio.com/XIAO_BLE/) (nRF52840)
-- トラックボール (右側のみ): PAW3222
-- マトリクス: col2row、各 4 行 × 5 列
-
-GPIO ピン割り当ては
-[`boards/shields/aerogu34/aerogu34.dtsi`](boards/shields/aerogu34/aerogu34.dtsi)
-を参照。
-
-## キーマップ
-
-[`config/aerogu34.keymap`](config/aerogu34.keymap) で定義。レイヤー構成:
-
-| Layer | 用途 |
-|---|---|
-| 0 Default | 基本入力 |
-| 1 Function | ファンクションキー、記号、矢印キー |
-| 2 Number | 数字、四則演算、IME 切替 |
-| 3 Scroll | BT プロファイル選択、トラックボールスクロール、bootloader/`studio_unlock` 起動 |
-| 4 Mouse | マウスボタン |
-
-OS 側の設定を**日本語 (JIS) キーボード**にした状態で正しい記号が打てる
-ように、`JP_*` 系の defines で変換しています。
-
-### 主なコンボ
-
-| Keys | Result |
-|---|---|
-| `Q` + `W` (positions 11, 12) | `Tab` |
-| `W` + `E` (positions 12, 13) | `Shift+Tab` |
-| 親指左 2 + その隣 | `Left Win` |
-| `0` + `4` キー (layer 3) | BT プロファイル全消去 |
-| `1` + `2` + `3` キー (layer 3) | bootloader 起動 |
-
-詳細は keymap ファイルを参照。
+# Aerogu
+現在テスター向けに販売しているAeroguのファームウェア置き場
 
 ## ファームウェアのビルド
 
-### GitHub Actions (推奨)
+### GitHub Actions
 
 このリポジトリへ push すると
 [.github/workflows/build.yml](.github/workflows/build.yml) が自動的に
@@ -70,29 +19,6 @@ GitHub Actions の Artifacts から `firmware` をダウンロードしてくだ
 | `aerogu34_left.uf2` | 左 (ペリフェラル) |
 | `settings_reset.uf2` | BLE ペアリング情報リセット用 |
 
-### ローカルビルド
-
-[urob 氏の zmk-config workspace](https://github.com/urob/zmk-config)
-ベースのビルド環境を想定しています。
-Nix + west + Zephyr SDK が必要。
-
-```bash
-just init   # west workspace 初期化
-just build aerogu34_right_prospector
-just build aerogu34_right
-just build aerogu34_left
-just build settings_reset
-```
-
-または west 直接:
-
-```bash
-west build -s zmk/app -b seeeduino_xiao_ble \
-  -S studio-rpc-usb-uart \
-  -- -DSHIELD="aerogu34_right rgbled_adapter" \
-     -DZMK_CONFIG=$(pwd)/config \
-     -DZMK_EXTRA_MODULES=$(pwd)
-```
 
 ## 書き込み (フラッシュ)
 
@@ -110,13 +36,12 @@ west build -s zmk/app -b seeeduino_xiao_ble \
 `aerogu34_right_prospector.uf2` または `aerogu34_right.uf2` どちらでも
 DYA Studio 経由でランタイム設定が可能:
 
+ただし、Prospector Scanner版は有線接続のみ対応
+
 1. Chrome で [DYA Studio](https://studio.dya.cormoran.works/) を開く
-2. USB を選択してセントラル (右側) を選ぶ
+2. USB を選択してAeroguを選ぶ
 3. トラックボール感度、自動マウスレイヤー、idle/sleep タイムアウトなどを編集
 4. 保存すると nRF52840 の settings 領域に persistent 保存される
-
-BLE 接続は Prospector の advertising と競合するため、現状は USB 接続のみ
-動作確認済み (詳細は後述の "既知の制限")。
 
 ## 依存モジュール / ライセンス
 
@@ -162,15 +87,6 @@ USB 接続なら問題ありません。
 ZMK Studio の directed advertising と単一の advertising slot を取り合います。
 Prospector を完全無効化したい場合は `aerogu34_right.uf2` を使用してください。
 
-### Prospector Scanner で見え方が不安定なケース
-
-Prospector v2.2.1 には split central キーボードで Burst/Silent サイクルが
-正しく終了しない不具合があり、その結果 ~10% しか advertising されません
-([carrefinho/prospector-zmk-module #?](https://github.com/carrefinho/prospector-zmk-module)
- にて report 済)。
-修正がマージされて `revision: main` に流れてくれば自動的に改善されます。
-当面は scanner が間欠的に見える程度で機能上の問題はありません。
-
 ## 参考実装・参照リンク
 
 - [ZMK firmware](https://zmk.dev) — 本体ドキュメント、Behavior 一覧、Build instructions
@@ -178,9 +94,6 @@ Prospector v2.2.1 には split central キーボードで Burst/Silent サイク
 - [DYA Studio 統合ガイド](https://github.com/cormoran/zmk-keyboard-dya-dash) — cormoran 氏のリファレンス実装
 - [DYA Studio](https://studio.dya.cormoran.works/) — ブラウザベースの ZMK Studio 拡張
 - [Prospector ZMK Module](https://github.com/carrefinho/prospector-zmk-module) — Status advertisement
-- 同種の Split + トラックボール + DYA Studio 構成の参考実装:
-  - [zmk-config-KUKEY42](https://github.com/cormoran/zmk-config-KUKEY42)
-  - [zmk-config-LiNEA40](https://github.com/cormoran/zmk-config-LiNEA40)
 
 ## ライセンス
 
