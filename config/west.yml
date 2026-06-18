@@ -26,12 +26,15 @@ manifest:
       remote: caksoylar
       revision: a3510c9de46de8b42c803286f4978466c6ea3916
     # DYA Studio modules
-    # Pinned to the last commit before each module's "Migrate to zmk v4" PR
-    # (cormoran's modules are migrating their main branches to Zephyr 4.x /
-    # ZMK main, but we're on ZMK v0.3-branch+dya / Zephyr 3.5).
+    # cormoran's modules are migrating their main branches to ZMK main /
+    # Zephyr 4.x, but we're on ZMK v0.3-branch+dya / Zephyr 3.5. Two of the
+    # four have a 'zmk-v0.3.0.0' tag pointing at the last v0.3-compatible
+    # commit; use it. The other two still have v0.3-compatible mains but no
+    # tag, so pin defensively to the current tip SHA (so a future v4 PR
+    # doesn't silently break this build).
     - name: zmk-module-ble-management
       remote: cormoran
-      revision: 851661cd21f2aded8ec649da86e01a207dc4b973
+      revision: zmk-v0.3.0.0
     - name: zmk-module-battery-history
       remote: cormoran
       revision: 307755dd2ad4d320e14de162e8e5ef018f29d929
@@ -40,7 +43,7 @@ manifest:
       revision: ad1c995cf910ca989ecd6352a1d0b41ccb18362c
     - name: zmk-module-runtime-input-processor
       remote: cormoran
-      revision: dbf92f764de8b6ffd60bf5850514302875fe2570
+      revision: zmk-v0.3.0.0
     # Deadzone input processor
     - name: zmk-input-processor-deadzone
       remote: prospector
