@@ -30,4 +30,11 @@
     - `CONFIG_ZMK_SPLIT_BLE_CENTRAL_SPLIT_RUN_STACK_SIZE=2048`（分割中央書き込みスレッドのスタックを2048バイトへ拡張）
     ※ `CONFIG_BT_CTLR_TX_PWR_PLUS_8=y` は消費電力への配慮等の観点から除外。
 
+## 2026-07-14
+### Fork元リポジトリの最新状態との同期
+- Fork元リモートとして `upstream` (`https://github.com/t-ogura/zmk-keyboard-aerogu34.git`) を追加。
+- `upstream/main` から最新のコミット（レイアウトJSONの物理行・列インデックス対応、ZMK Studio RPCスタックやバッファ増量設定の公式統合、プリビルドUF2ファイルの更新など）を取得。
+- `git merge upstream/main` にてマージを実行。衝突した `config/aerogu34.json` および `config/aerogu34_right.conf` は Fork 元の変更を採用して解消。
+- マージコミットを作成し、自身のリモートリポジトリ（`origin/main`）にプッシュ。
+
 
