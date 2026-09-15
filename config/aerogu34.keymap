@@ -51,7 +51,7 @@
 
         stab {
             bindings = <&kp LS(TAB)>;
-            key-positions = <12 13>;
+            key-positions = <10 11>;
         };
 
         btreset {
@@ -85,6 +85,16 @@
             bindings = <&kp RIGHT_ALT>;
             key-positions = <29 27>;
         };
+
+        lang1 {
+            bindings = <&kp LANGUAGE_1>;
+            key-positions = <13 12>;
+        };
+
+        lang2 {
+            bindings = <&kp LANGUAGE_2>;
+            key-positions = <16 17>;
+        };
     };
 
     keymap {
@@ -93,50 +103,50 @@
         default_layer {
             display-name = "Default";
             bindings = <
-&kp Q             &kp W  &kp E    &kp R  &kp T                                      &kp Y        &kp U  &kp I      &kp O    &kp P
-&mt LCTRL A             &kp S  &lt 3 D  &kp F  &kp G                                      &kp H        &kp J  &lt 3 K    &kp L    &mt RCTRL MINUS
-&mt LEFT_SHIFT Z  &mt LEFT_WIN X  &mt LEFT_ALT C    &kp V  &kp B                                      &kp N        &kp M  &mt RIGHT_ALT COMMA  &mt RIGHT_WIN DOT  &mt RIGHT_SHIFT SLASH
-                                          &lt 1 SPACE  &lt 3 GRAVE    &kp BACKSPACE  &lt 2 ENTER
+&kp Q             &kp W           &kp E           &kp R  &kp T  &kp Y          &kp U        &kp I                &kp O              &kp P
+&mt LCTRL A       &kp S           &lt 3 D         &kp F  &kp G  &kp H          &kp J        &lt 3 K              &kp L              &mt RCTRL MINUS
+&mt LEFT_SHIFT Z  &mt LEFT_WIN X  &mt LEFT_ALT C  &kp V  &kp B  &kp N          &kp M        &mt RIGHT_ALT COMMA  &mt RIGHT_WIN DOT  &mt RIGHT_SHIFT SLASH
+&lt 1 SPACE       &lt 3 GRAVE                                   &kp BACKSPACE  &lt 2 ENTER
             >;
         };
 
         function_layer {
             display-name = "Function";
             bindings = <
-&kp F1         &kp F2           &kp F3      &kp F4         &kp F5                               &kp F6             &kp F7    &kp F8    &kp F9     &kp F10
-&kp JP_COLON   &kp EXCLAMATION  &kp SLASH   &kp JP_LPAREN  &kp JP_LBRACKET                      &kp JP_UNDERSCORE  &mkp MB1  &kp UP    &mkp MB2   &kp F11
-&kp SEMICOLON  &kp QUESTION     &kp JP_YEN  &kp JP_RPAREN  &kp JP_RBRACKET                      &kp JP_AT          &kp LEFT  &kp DOWN  &kp RIGHT  &kp F12
-                                                            &trans           &trans    &trans     &trans
+&kp F1         &kp F2           &kp F3      &kp F4         &kp F5           &kp F6             &kp F7    &kp F8    &kp F9     &kp F10
+&kp JP_COLON   &kp EXCLAMATION  &kp SLASH   &kp JP_LPAREN  &kp JP_LBRACKET  &kp JP_UNDERSCORE  &mkp MB1  &kp UP    &mkp MB2   &kp F11
+&kp SEMICOLON  &kp QUESTION     &kp JP_YEN  &kp JP_RPAREN  &kp JP_RBRACKET  &kp JP_AT          &kp LEFT  &kp DOWN  &kp RIGHT  &kp F12
+&trans         &trans                                                       &trans             &trans
             >;
         };
 
         number_layer {
             display-name = "Number";
             bindings = <
-&kp TAB               &kp N7        &kp N8        &kp N9        &kp MINUS                          &kp RIGHT_BRACKET  &trans    &mkp MB3  &trans     &kp ESC
-&kp DOT       &kp NUMBER_4  &kp N5        &kp NUMBER_6  &kp JP_PLUS                        &kp RPAR           &mkp MB1  &kp UP    &mkp MB2   &kp COLON
-&kp NUMBER_0  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp EQUAL                          &kp RIGHT_BRACE    &kp LEFT  &kp DOWN  &kp RIGHT  &kp SLASH
-                                                                 &kp ESC    &kp DEL    &kp LANG1  &trans
+&kp TAB       &kp N7        &kp N8        &kp N9        &kp MINUS    &kp RIGHT_BRACKET  &trans    &mkp MB3  &trans     &kp ESC
+&kp DOT       &kp NUMBER_4  &kp N5        &kp NUMBER_6  &kp JP_PLUS  &kp RPAR           &mkp MB1  &kp UP    &mkp MB2   &kp COLON
+&kp NUMBER_0  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp EQUAL    &kp RIGHT_BRACE    &kp LEFT  &kp DOWN  &kp RIGHT  &kp SLASH
+&kp ESC       &kp DEL                                                &kp LANG1          &trans
             >;
         };
 
         scroll_layer {
             display-name = "Scroll";
             bindings = <
-&bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                    &kp LC(LG(LEFT))  &kp LG(TAB)  &mkp MB3  &trans     &kp LG(LC(RIGHT))
-&studio_unlock        &trans        &trans        &trans        &trans                          &mkp MB4          &mkp MB1     &kp UP    &mkp MB2   &mkp MB5
-&trans        &trans        &trans        &trans        &trans                          &trans            &kp LEFT     &kp DOWN  &kp RIGHT  &trans
-                                                        &trans        &trans    &trans  &trans
+&bt BT_SEL 0    &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &kp LC(LG(LEFT))  &kp LG(TAB)  &mkp MB3  &trans     &kp LG(LC(RIGHT))
+&studio_unlock  &trans        &trans        &trans        &trans        &mkp MB4          &mkp MB1     &kp UP    &mkp MB2   &mkp MB5
+&trans          &trans        &trans        &trans        &trans        &trans            &kp LEFT     &kp DOWN  &kp RIGHT  &trans
+&trans          &trans                                                  &trans            &trans
             >;
         };
 
         mouse_layer {
             display-name = "Mouse";
             bindings = <
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans    &mkp MB3  &trans    &trans
-&trans  &trans  &trans  &trans  &trans                    &trans  &mkp MB1  &trans    &mkp MB2  &trans
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans    &trans    &trans    &trans
-                                &trans  &trans    &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans    &mkp MB3  &trans    &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &mkp MB1  &trans    &mkp MB2  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans    &trans    &trans
+&trans  &trans                          &trans  &trans
             >;
         };
     };
